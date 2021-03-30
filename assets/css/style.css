@@ -7,9 +7,14 @@ body {
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
     background-image: url("../images/background-image.jpg");
+    
 }
 
 nav span {
     width: 100%;
     text-align: center;
+    text-shadow: 1.5px 1.5px;
+    font-family: fantasy;
+    font-size: large;
+    background-color: rgb(73, 173, 168);
 }
