@@ -28,7 +28,7 @@ function getTrendingMovies() {
     requestMovies(url, render, handleGeneralError);
 }
 
-function searchUpcominghMovies() {
+function searchUpcomingMovies() {
     const url = generateMovieDBUrl('/movie/upcoming');
     const render = renderMovies.bind({ title: 'Upcoming Movies',})
     requestMovies(url, render, handleGeneralError);

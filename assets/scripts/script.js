@@ -1,8 +1,8 @@
-//const INITIAL_SEARCH_VALUE = 'arnold';
-//const log = console.log;
+const INITIAL_SEARCH_VALUE = 'arnold';
+const log = console.log;
 
 const searchButton = document.querySelector('#search');;
-const searchInput = document.querySelector('#exampleInputEmail1');
+const searchInput = document.querySelector('#search-input');
 const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
 
