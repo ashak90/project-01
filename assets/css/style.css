@@ -31,6 +31,7 @@ nav span {
     position: absolute;
     opacity: 0.6;
     background-repeat: no-repeat;
+    background-size: cover;
     height: 100vh;
     top: 0px;
     right: 0px;
@@ -39,11 +40,14 @@ nav span {
 
 }
 
-h1 {
+#search-bar {
     position: relative;
-    color: black;
-    background-color: rgba(73, 173, 168, .6);
+    color: white;
+    background-color: rgba(73, 173, 168,.9);
     padding: 25px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* top: -100px; */
 }
 
