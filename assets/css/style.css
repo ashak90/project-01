@@ -16,8 +16,34 @@ nav span {
     background-color: rgb(73, 173, 168);
 }
 
-.bg {
+.bg{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg::before {
+    content: "";
     background-image: url("../images/background-image.jpg");
+    position: absolute;
     opacity: 0.6;
+    background-repeat: no-repeat;
+    height: 100vh;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+
+}
+
+h1 {
+    position: relative;
+    color: black;
+    background-color: rgba(73, 173, 168, .6);
+    padding: 25px;
+    /* top: -100px; */
 }
 
