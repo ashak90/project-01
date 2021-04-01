@@ -6,6 +6,7 @@ const searchButton = document.querySelector('#search');;
 const searchInput = document.querySelector('#search-input');
 const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
+const whereToWatchContainer = $("#whereToWatch");
 
 function createImageContainer(imageUrl, id) {
     const tempDiv = document.createElement('div');
@@ -88,12 +89,14 @@ function createMovieContainer(section) {
     return movieElement;
 }
 function displayWhereToWatch(data, imgUrl){    
-    console.log(data);
-    window.location.href = "whereToWatch.html";    
+    
+    whereToWatchContainer.show(); 
+    console.log(data);            
     $("#movieImg").attr("src", imgUrl);
     $("#query").text(data[0].Query);
     $("#watch").text(data[0].Watch);
     $("#watchUrl").attr("href", data[0].WatchUrl);
+    //window.location.href = "whereToWatch.html";
 }
 
 async function getMovieNameFromId(movieId){
@@ -118,7 +121,7 @@ document.onclick = async function (event) {
         const movieId = event.target.dataset.movieId;        
         const section = event.target.parentElement.parentElement;
         const content = section.nextElementSibling;
-        const imgUrl = event.target.getAttribute("src");         
+        const imgUrl = $(event.target).attr  ("src");         
         content.classList.add('content-display');
         const movieTitle = await getMovieNameFromId(movieId);                           
         getWhereToWatch(movieTitle, "movie", imgUrl);              
@@ -131,6 +134,7 @@ document.onclick = async function (event) {
     }
 }
 
+whereToWatchContainer.hide();
 searchMovie(INITIAL_SEARCH_VALUE);
 searchUpcomingMovies();
 getTopRatedMovies();
