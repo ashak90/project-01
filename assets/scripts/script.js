@@ -1,11 +1,15 @@
-const INITIAL_SEARCH_VALUE = 'arnold';
-
 const log = console.log;
 
-const searchButton = document.querySelector('#search');;
+const searchButton = document.querySelector('#search');
 const searchInput = document.querySelector('#search-input');
 const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
+
+// const searchButton = $("#search");
+// const searchInput = $("#search-input");
+// const moviesContainer = $("#movies-container");
+// const moviesSearchable = $("#movies-searchable");
+
 const whereToWatchContainer = $("#whereToWatch");
 
 function createImageContainer(imageUrl, id) {
@@ -44,7 +48,6 @@ function renderMovies(data) {
     moviesContainer.appendChild(moviesBlock);
 }
 
-
 function renderSearchMovies(data) {
     moviesSearchable.innerHTML = '';
     const moviesBlock = generateMoviesBlock(data);
@@ -73,7 +76,6 @@ function generateMoviesBlock(data) {
     return movieSectionAndContent;
 }
 
-
 function createMovieContainer(section) {
     const movieElement = document.createElement('div');
     movieElement.setAttribute('class', 'movie');
@@ -88,52 +90,52 @@ function createMovieContainer(section) {
     movieElement.insertBefore(section, movieElement.firstChild);
     return movieElement;
 }
+
 function displayWhereToWatch(data, imgUrl){       
     whereToWatchContainer.show();
     createCard(data, imgUrl);        
 }
+
 function createCard(data, imgUrl){
     console.log(data);
+    let newCard = $("<div>");
+    newCard.addClass("card text-center bg-secondary");
+
+    let newImg = $("<img>");
+    newImg.attr("src", imgUrl);
+    newImg.addClass("card-img-top");
+    newCard.append(newImg);
+
+    let newBody = $("<div>");
+    newBody.addClass("card-body");
+    newCard.append(newBody);
+
+    let query = $("<h5>");
+    query.addClass("card-title");
+    query.text("Where to watch " + data[0].Query);
+    newBody.append(query);
+
+    let list = $("<ul>");
+    list.addClass("list-group");
+    newBody.append(list);
+
     for(let i = 0; i < data.length; i++){
-        let newCard = $("<div>");
-        newCard.addClass("card text-center bg-secondary");
-
-        if(i == 0){
-            let newImg = $("<img>");
-             newImg.attr("src", imgUrl);
-             newImg.addClass("card-img-top");
-             newCard.append(newImg);
-        }       
-
-        let newBody = $("<div>");
-        newBody.addClass("card-body");
-        newCard.append(newBody);
-
-        if(i == 0){
-            let query = $("<h5>");
-            query.addClass("card-title");
-            query.text("Where to watch " + data[i].Query);
-            newBody.append(query);
-        }        
-
+        let listItem = $("<li>");
+        listItem.addClass("list-group-item bg-secondary");
+        list.append(listItem);          
+  
         let cardText = $("<p>");
         cardText.addClass("card-text");
         cardText.text(data[i].Watch);
-        newBody.append(cardText);
+        listItem.append(cardText);
 
         let button = $("<a>");
         button.addClass("btn btn-outline-light");
         button.text("Click here to stream!");
         button.attr("href", data[i].WatchUrl);
-        newBody.append(button);
-
-        whereToWatchContainer.append(newCard);
+        listItem.append(button);        
     }
-}
-
-async function getMovieNameFromId(movieId){
-    const data = await getMovieFromId(movieId);
-    return data.original_title;   
+    whereToWatchContainer.append(newCard);
 }
 
 searchButton.onclick = function (event) {
@@ -141,13 +143,14 @@ searchButton.onclick = function (event) {
     const value = searchInput.value
 
    if (value) {    
-    searchMovie(value);          
+    searchMovie(value);
+    $(moviesContainer).hide();        
    }
     resetInput();
 }
 
 document.onclick = async function (event) {
-    //log('Event: ', event);
+    
     const { tagName, id } = event.target;       
     if (tagName.toLowerCase() === 'img') {
         const movieId = event.target.dataset.movieId;        
@@ -156,8 +159,7 @@ document.onclick = async function (event) {
         const imgUrl = $(event.target).attr  ("src");         
         content.classList.add('content-display');
         const movieTitle = await getMovieNameFromId(movieId);                           
-        getWhereToWatch(movieTitle, "movie", imgUrl);              
-        //getVideosByMovieId(movieId, content);
+        getWhereToWatch(movieTitle, "movie", imgUrl);       
     }
 
     if (id === 'content-close') {
@@ -167,7 +169,6 @@ document.onclick = async function (event) {
 }
 
 whereToWatchContainer.hide();
-searchMovie(INITIAL_SEARCH_VALUE);
 searchUpcomingMovies();
 getTopRatedMovies();
 searchPopularMovie();

@@ -49,17 +49,13 @@ function searchMovie(value) {
     const renderSearch = renderSearchMovies.bind({ title: value});
     requestMovies(url, renderSearch, handleGeneralError);
 }
-function getVideosByMovieId(movieId, content) {
-    const url = generateMovieDBUrl(`/movie/${movieId}/videos`);
-    const render = getMovieFromId();
-    requestMovies(url, render, handleGeneralError);
-} 
-async function getMovieFromId(movieId){
+
+async function getMovieNameFromId(movieId){
     const url = generateMovieDBUrl(`/movie/${movieId}`);      
     const res = await fetch(url);
     if(!res.ok) handleGeneralError;
     const data = await res.json();
-    return await data;        
+    return await data.original_title;        
 }
 
 function getWhereToWatch(title, type, imgUrl){       
