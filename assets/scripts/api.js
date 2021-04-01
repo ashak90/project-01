@@ -28,13 +28,11 @@ function getTrendingMovies() {
     requestMovies(url, render, handleGeneralError);
 }
 
-function searchUpcominghMovies() {
+function searchUpcomingMovies() {
     const url = generateMovieDBUrl('/movie/upcoming');
     const render = renderMovies.bind({ title: 'Upcoming Movies',})
     requestMovies(url, render, handleGeneralError);
 }
-
-
 
 function searchPopularMovie() {
     const url = generateMovieDBUrl('/movie/popular');
@@ -45,10 +43,4 @@ function searchPopularMovie() {
 function searchMovie(value) {
     const url = generateMovieDBUrl('/search/movie') + '&query=' + value;
     requestMovies(url, renderSearchMovies, handleGeneralError);
-}
-
-function getVideosByMovieId(movieId, content) {
-    const url = generateMovieDBUrl(`/movie/${movieId}/videos`);
-    const render = createVideoTemplate.bind({ content});
-    requestMovies(url, render, handleGeneralError);
 }
