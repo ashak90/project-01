@@ -88,15 +88,47 @@ function createMovieContainer(section) {
     movieElement.insertBefore(section, movieElement.firstChild);
     return movieElement;
 }
-function displayWhereToWatch(data, imgUrl){    
-    
-    whereToWatchContainer.show(); 
-    console.log(data);            
-    $("#movieImg").attr("src", imgUrl);
-    $("#query").text(data[0].Query);
-    $("#watch").text(data[0].Watch);
-    $("#watchUrl").attr("href", data[0].WatchUrl);
-    //window.location.href = "whereToWatch.html";
+function displayWhereToWatch(data, imgUrl){       
+    whereToWatchContainer.show();
+    createCard(data, imgUrl);        
+}
+function createCard(data, imgUrl){
+    console.log(data);
+    for(let i = 0; i < data.length; i++){
+        let newCard = $("<div>");
+        newCard.addClass("card text-center bg-secondary");
+
+        if(i == 0){
+            let newImg = $("<img>");
+             newImg.attr("src", imgUrl);
+             newImg.addClass("card-img-top");
+             newCard.append(newImg);
+        }       
+
+        let newBody = $("<div>");
+        newBody.addClass("card-body");
+        newCard.append(newBody);
+
+        if(i == 0){
+            let query = $("<h5>");
+            query.addClass("card-title");
+            query.text("Where to watch " + data[i].Query);
+            newBody.append(query);
+        }        
+
+        let cardText = $("<p>");
+        cardText.addClass("card-text");
+        cardText.text(data[i].Watch);
+        newBody.append(cardText);
+
+        let button = $("<a>");
+        button.addClass("btn btn-outline-light");
+        button.text("Click here to stream!");
+        button.attr("href", data[i].WatchUrl);
+        newBody.append(button);
+
+        whereToWatchContainer.append(newCard);
+    }
 }
 
 async function getMovieNameFromId(movieId){
