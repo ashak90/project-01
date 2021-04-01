@@ -52,28 +52,6 @@ section img {
 
 img:hover {
     margin-left: 0 40px;
-    transform: scale(1.2);
+    transform: scale(1.1);
     cursor: pointer;
-}
-
-.content {
-    border: 1px solid lightgrey;
-    padding: 20px;
-    display: none;
-}
-
-#content-close {
-    cursor: pointer;
-}
-
-.content {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    align-items: center;
-    margin: 10px;
-}
-
-.content-display {
-    display: block;
 }
