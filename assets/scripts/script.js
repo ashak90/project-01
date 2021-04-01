@@ -149,7 +149,7 @@ searchButton.onclick = function (event) {
     resetInput();
 }
 
-document.onclick = async function (event) {
+document.onclick = async function (event) {    
     
     const { tagName, id } = event.target;       
     if (tagName.toLowerCase() === 'img') {
@@ -157,9 +157,10 @@ document.onclick = async function (event) {
         const section = event.target.parentElement.parentElement;
         const content = section.nextElementSibling;
         const imgUrl = $(event.target).attr  ("src");         
-        content.classList.add('content-display');
+        content.classList.add('content-display');                
         const movieTitle = await getMovieNameFromId(movieId);                           
-        getWhereToWatch(movieTitle, "movie", imgUrl);       
+        getWhereToWatch(movieTitle, "movie", imgUrl);
+        window.location.hash = "navbar";               
     }
 
     if (id === 'content-close') {
