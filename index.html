@@ -23,12 +23,21 @@
 
     <div class="bg">
         <div class="col-sm-4 mt-4" id="search-bar">
-
             <h1> Search By: </h1>
             <form class="form-inline input-group" id="search-city">
                 <input class=" form-control" type="search" placeholder="Search" id="search-input">
             </form>
             <button id="search"> Search</button>
+            <div id="whereToWatch">
+                <div class="card text-center bg-secondary m-5">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" id="movieImg">
+                    <div class="card-body">
+                        <h5 class="card-title">Where to watch <span id="query"></span></h5>
+                        <p class="card-text" id="watch"></p>
+                        <a href="" class="btn btn-outline-light" id="watchUrl">Click here to stream!</a>
+                    </div>
+                </div>
+            </div>            
         </div>
     </div>
     <div class="container-fluid" id="all-movies-container">
@@ -41,14 +50,14 @@
         </div>
         
     </div>
-
-    <script src="assets/scripts/api.js"></script>
-    <script src="assets/scripts/script.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="assets/scripts/api.js"></script>
+    <script src="assets/scripts/script.js"></script>
 </body>
 
 </html>
