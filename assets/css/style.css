@@ -6,6 +6,9 @@ body {
     right: 0;
     bottom: 0;    
 }
+h2{
+    text-transform: capitalize;
+}
 
 nav span {
     width: 100%;
