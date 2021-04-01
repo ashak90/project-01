@@ -1,5 +1,9 @@
 const INITIAL_SEARCH_VALUE = 'arnold';
+
+
+
 const log = console.log;
+
 
 const searchButton = document.querySelector('#search');;
 const searchInput = document.querySelector('#search-input');
@@ -26,45 +30,6 @@ function resetInput() {
 function handleGeneralError(error) {
     log('Error: ', error.message);
     alert(error.message || 'Internal Server');
-}
-
-function createIframe(video) {
-    const videoKey = (video && video.key) || 'No key found!!!';
-    const iframe = document.createElement('iframe');
-    iframe.src = `http://www.youtube.com/embed/${videoKey}`;
-    iframe.width = 360;
-    iframe.height = 315;
-    iframe.allowFullscreen = true;
-    return iframe;
-}
-
-function insertIframeIntoContent(video, content) {
-    const videoContent = document.createElement('div');
-    const iframe = createIframe(video);
-
-    videoContent.appendChild(iframe);
-    content.appendChild(videoContent);
-}
-
-
-function createVideoTemplate(data) {
-    const content = this.content;
-    content.innerHTML = '<p id="content-close">X</p>';
-    
-    const videos = data.results || [];
-
-    if (videos.length === 0) {
-        content.innerHTML = `
-            <p id="content-close">X</p>
-            <p>No Trailer found for this video id of ${data.id}</p>
-        `;
-        return;
-    }
-
-    for (let i = 0; i < 4; i++) {
-        const video = videos[i];
-        insertIframeIntoContent(video, content);
-    }
 }
 
 function createSectionHeader(title) {
@@ -115,7 +80,7 @@ function createMovieContainer(section) {
 
     const template = `
         <div class="content">
-            <p id="content-close">X</p>
+            <p id="content-close"></p>
         </div>
     `;
 
@@ -135,7 +100,7 @@ searchButton.onclick = function (event) {
 }
 
 document.onclick = function (event) {
-    log('Event: ', event);
+    //log('Event: ', event);
     const { tagName, id } = event.target;
     if (tagName.toLowerCase() === 'img') {
         const movieId = event.target.dataset.movieId;
