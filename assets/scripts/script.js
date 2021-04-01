@@ -1,9 +1,6 @@
 const INITIAL_SEARCH_VALUE = 'arnold';
 
-
-
 const log = console.log;
-
 
 const searchButton = document.querySelector('#search');;
 const searchInput = document.querySelector('#search-input');
@@ -50,6 +47,8 @@ function renderMovies(data) {
 function renderSearchMovies(data) {
     moviesSearchable.innerHTML = '';
     const moviesBlock = generateMoviesBlock(data);
+    const header = createSectionHeader("Searched for: " + this.title);
+    moviesBlock.insertBefore(header, moviesBlock.firstChild);
     moviesSearchable.appendChild(moviesBlock);
 }
 
@@ -88,26 +87,42 @@ function createMovieContainer(section) {
     movieElement.insertBefore(section, movieElement.firstChild);
     return movieElement;
 }
+function displayWhereToWatch(data, imgUrl){    
+    console.log(data);
+    window.location.href = "whereToWatch.html";    
+    $("#movieImg").attr("src", imgUrl);
+    $("#query").text(data[0].Query);
+    $("#watch").text(data[0].Watch);
+    $("#watchUrl").attr("href", data[0].WatchUrl);
+}
+
+async function getMovieNameFromId(movieId){
+    const data = await getMovieFromId(movieId);
+    return data.original_title;   
+}
 
 searchButton.onclick = function (event) {
     event.preventDefault();
     const value = searchInput.value
 
-   if (value) {
-    searchMovie(value);
+   if (value) {    
+    searchMovie(value);          
    }
     resetInput();
 }
 
-document.onclick = function (event) {
+document.onclick = async function (event) {
     //log('Event: ', event);
-    const { tagName, id } = event.target;
+    const { tagName, id } = event.target;       
     if (tagName.toLowerCase() === 'img') {
-        const movieId = event.target.dataset.movieId;
+        const movieId = event.target.dataset.movieId;        
         const section = event.target.parentElement.parentElement;
         const content = section.nextElementSibling;
+        const imgUrl = event.target.getAttribute("src");         
         content.classList.add('content-display');
-        getVideosByMovieId(movieId, content);
+        const movieTitle = await getMovieNameFromId(movieId);                           
+        getWhereToWatch(movieTitle, "movie", imgUrl);              
+        //getVideosByMovieId(movieId, content);
     }
 
     if (id === 'content-close') {
