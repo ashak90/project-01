@@ -94,41 +94,44 @@ function displayWhereToWatch(data, imgUrl){
 }
 function createCard(data, imgUrl){
     console.log(data);
+    let newCard = $("<div>");
+    newCard.addClass("card text-center bg-secondary");
+
+    let newImg = $("<img>");
+    newImg.attr("src", imgUrl);
+    newImg.addClass("card-img-top");
+    newCard.append(newImg);
+
+    let newBody = $("<div>");
+    newBody.addClass("card-body");
+    newCard.append(newBody);
+
+    let query = $("<h5>");
+    query.addClass("card-title");
+    query.text("Where to watch " + data[0].Query);
+    newBody.append(query);
+
+    let list = $("<ul>");
+    list.addClass("list-group");
+    newBody.append(list);
+
     for(let i = 0; i < data.length; i++){
-        let newCard = $("<div>");
-        newCard.addClass("card text-center bg-secondary");
-
-        if(i == 0){
-            let newImg = $("<img>");
-             newImg.attr("src", imgUrl);
-             newImg.addClass("card-img-top");
-             newCard.append(newImg);
-        }       
-
-        let newBody = $("<div>");
-        newBody.addClass("card-body");
-        newCard.append(newBody);
-
-        if(i == 0){
-            let query = $("<h5>");
-            query.addClass("card-title");
-            query.text("Where to watch " + data[i].Query);
-            newBody.append(query);
-        }        
-
+        let listItem = $("<li>");
+        listItem.addClass("list-group-item bg-secondary");
+        list.append(listItem);          
+  
         let cardText = $("<p>");
         cardText.addClass("card-text");
         cardText.text(data[i].Watch);
-        newBody.append(cardText);
+        listItem.append(cardText);
 
         let button = $("<a>");
         button.addClass("btn btn-outline-light");
         button.text("Click here to stream!");
         button.attr("href", data[i].WatchUrl);
-        newBody.append(button);
-
-        whereToWatchContainer.append(newCard);
+        listItem.append(button);        
     }
+    whereToWatchContainer.append(newCard);
 }
 
 async function getMovieNameFromId(movieId){
