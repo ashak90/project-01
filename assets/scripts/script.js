@@ -1,11 +1,15 @@
-const INITIAL_SEARCH_VALUE = 'arnold';
-
 const log = console.log;
 
-const searchButton = document.querySelector('#search');;
+const searchButton = document.querySelector('#search');
 const searchInput = document.querySelector('#search-input');
 const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
+
+// const searchButton = $("#search");
+// const searchInput = $("#search-input");
+// const moviesContainer = $("#movies-container");
+// const moviesSearchable = $("#movies-searchable");
+
 const whereToWatchContainer = $("#whereToWatch");
 
 function createImageContainer(imageUrl, id) {
@@ -44,7 +48,6 @@ function renderMovies(data) {
     moviesContainer.appendChild(moviesBlock);
 }
 
-
 function renderSearchMovies(data) {
     moviesSearchable.innerHTML = '';
     const moviesBlock = generateMoviesBlock(data);
@@ -73,7 +76,6 @@ function generateMoviesBlock(data) {
     return movieSectionAndContent;
 }
 
-
 function createMovieContainer(section) {
     const movieElement = document.createElement('div');
     movieElement.setAttribute('class', 'movie');
@@ -88,10 +90,12 @@ function createMovieContainer(section) {
     movieElement.insertBefore(section, movieElement.firstChild);
     return movieElement;
 }
+
 function displayWhereToWatch(data, imgUrl){       
     whereToWatchContainer.show();
     createCard(data, imgUrl);        
 }
+
 function createCard(data, imgUrl){
     console.log(data);
     let newCard = $("<div>");
@@ -134,11 +138,6 @@ function createCard(data, imgUrl){
     whereToWatchContainer.append(newCard);
 }
 
-async function getMovieNameFromId(movieId){
-    const data = await getMovieFromId(movieId);
-    return data.original_title;   
-}
-
 searchButton.onclick = function (event) {
     event.preventDefault();
     const value = searchInput.value
@@ -150,7 +149,7 @@ searchButton.onclick = function (event) {
 }
 
 document.onclick = async function (event) {
-    //log('Event: ', event);
+    
     const { tagName, id } = event.target;       
     if (tagName.toLowerCase() === 'img') {
         const movieId = event.target.dataset.movieId;        
@@ -159,8 +158,7 @@ document.onclick = async function (event) {
         const imgUrl = $(event.target).attr  ("src");         
         content.classList.add('content-display');
         const movieTitle = await getMovieNameFromId(movieId);                           
-        getWhereToWatch(movieTitle, "movie", imgUrl);              
-        //getVideosByMovieId(movieId, content);
+        getWhereToWatch(movieTitle, "movie", imgUrl);       
     }
 
     if (id === 'content-close') {
@@ -170,7 +168,6 @@ document.onclick = async function (event) {
 }
 
 whereToWatchContainer.hide();
-searchMovie(INITIAL_SEARCH_VALUE);
 searchUpcomingMovies();
 getTopRatedMovies();
 searchPopularMovie();
