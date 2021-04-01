@@ -143,7 +143,8 @@ searchButton.onclick = function (event) {
     const value = searchInput.value
 
    if (value) {    
-    searchMovie(value);          
+    searchMovie(value);
+    $(moviesContainer).hide();        
    }
     resetInput();
 }
