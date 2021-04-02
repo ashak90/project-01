@@ -1,12 +1,9 @@
+
 const INITIAL_SEARCH_VALUE = 'arnold';
+//const log = console.log;
 
-
-
-const log = console.log;
-
-
-const searchButton = document.querySelector('#search');;
-const searchInput = document.querySelector('#search-input');
+const searchButton = document.querySelector('#search');
+const searchInput = document.querySelector('#exampleInputEmail1');
 const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
 
@@ -62,7 +59,7 @@ function generateMoviesBlock(data) {
         const { poster_path, id } = movies[i];
 
         if (poster_path) {
-            const imageUrl = MOVIE_DB_IMAGE_ENDPOINT + poster_path;
+            const imageUrl = MOVIE_DB_IMAGE_LASTPART + poster_path;
     
             const imageContainer = createImageContainer(imageUrl, id);
             section.appendChild(imageContainer);
@@ -120,4 +117,4 @@ searchMovie(INITIAL_SEARCH_VALUE);
 searchUpcomingMovies();
 getTopRatedMovies();
 searchPopularMovie();
-getTrendingMovies();
+getNowPlayingMovies();
