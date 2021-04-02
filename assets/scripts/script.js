@@ -16,7 +16,7 @@ function setup(){
     searchUpcomingMovies();
     getTopRatedMovies();
     searchPopularMovie();
-    getTrendingMovies();
+    // getTrendingMovies();
 }
 
 //creates an html container to hold movie images
@@ -174,6 +174,7 @@ document.onclick = async function (event) {
     
     //only runs if the item clicked on is an image
     if (tagName.toLowerCase() === 'img') {
+        console.log("Clicked on an image")
         const movieId = event.target.dataset.movieId;        
         const section = event.target.parentElement.parentElement;
         const content = section.nextElementSibling;

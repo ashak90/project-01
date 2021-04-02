@@ -37,7 +37,7 @@ nav span {
     background-size: cover;
     height: 100vh;
     top: 0px;
-    right: 75px;
+    right: 25px;
     left: 0px;
     bottom: 600px;
 
@@ -76,7 +76,7 @@ nav span {
 #search-bar.moveLeft {
     position: relative;
     top: -205px;
-    left: -500px;
+    left: -200px;
 
     color: white;
     background-color: rgba(73, 173, 168,.9);
@@ -87,19 +87,6 @@ nav span {
     /* top: -100px; */
 } 
 
-#search-bar-2 {
-    /* position: relative; */
-    display: absolute;
-    float: left;
-    color: white;
-    background-color: rgba(73, 173, 168,.9);
-    padding: 25px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-bottom: 500px;
-    /* top: -100px; */
-}
 
 #search {
     position: relative;
@@ -148,14 +135,14 @@ img:hover {
     cursor: pointer;
 }
 
-.content {
+/* .content {
     display: grid;
     justify-content: space-around;
     flex-wrap: wrap;
     align-items: center;
     margin: 10px;
-}
+} */
 
-.content-display {
+/* .content-display {
     display: block;
-}
+} */
