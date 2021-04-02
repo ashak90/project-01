@@ -70,7 +70,7 @@ function generateMoviesBlock(data) {
         const { poster_path, id } = movies[i];
 
         if (poster_path) {
-            const imageUrl = MOVIE_DB_IMAGE_ENDPOINT + poster_path;
+            const imageUrl = MOVIE_DB_IMAGE_LASTPART + poster_path;
     
             const imageContainer = createImageContainer(imageUrl, id);
             section.appendChild(imageContainer);
@@ -176,3 +176,8 @@ document.onclick = async function (event) {
 
 setup();
 
+searchMovie(INITIAL_SEARCH_VALUE);
+searchUpcomingMovies();
+getTopRatedMovies();
+searchPopularMovie();
+getNowPlayingMovies();
