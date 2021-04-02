@@ -5,12 +5,16 @@ const searchInput = document.querySelector('#search-input');
 const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
 
-// const searchButton = $("#search");
-// const searchInput = $("#search-input");
-// const moviesContainer = $("#movies-container");
-// const moviesSearchable = $("#movies-searchable");
-
 const whereToWatchContainer = $("#whereToWatch");
+
+function setup(){
+    window.location.hash = "";
+    whereToWatchContainer.hide();
+    searchUpcomingMovies();
+    getTopRatedMovies();
+    searchPopularMovie();
+    getTrendingMovies();
+}
 
 function createImageContainer(imageUrl, id) {
     const tempDiv = document.createElement('div');
@@ -37,7 +41,6 @@ function handleGeneralError(error) {
 function createSectionHeader(title) {
     const header = document.createElement('h2');
     header.innerHTML = title;
-
     return header;
 }
 
@@ -71,7 +74,6 @@ function generateMoviesBlock(data) {
             section.appendChild(imageContainer);
         }
     }
-
     const movieSectionAndContent = createMovieContainer(section);
     return movieSectionAndContent;
 }
@@ -162,15 +164,11 @@ document.onclick = async function (event) {
         getWhereToWatch(movieTitle, "movie", imgUrl);
         window.location.hash = "navbar";               
     }
-
     if (id === 'content-close') {
         const content = event.target.parentElement;
         content.classList.remove('content-display');
     }
 }
 
-whereToWatchContainer.hide();
-searchUpcomingMovies();
-getTopRatedMovies();
-searchPopularMovie();
-getTrendingMovies();
+setup();
+
