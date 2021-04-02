@@ -1,7 +1,7 @@
 
 const MOVIE_DB_API = 'dc8aba4647cddc4a95994e5b2b372138'
-const MOVIE_DB_ENDPOINT = 'https://api.themoviedb.org';
-const MOVIE_DB_IMAGE_ENDPOINT = 'https://image.tmdb.org/t/p/w500';
+const MOVIE_DB_FIRSTPART = 'https://api.themoviedb.org';
+const MOVIE_DB_IMAGE_LASTPART = 'https://image.tmdb.org/t/p/w500';
 const DEFAULT_POST_IMAGE = 'https://via.placeholder.com/150';
     
 function requestMovies(url, onComplete, onError) {
@@ -12,7 +12,7 @@ function requestMovies(url, onComplete, onError) {
 }
 
 function generateMovieDBUrl(path) {
-    const url = `${MOVIE_DB_ENDPOINT}/3${path}?api_key=${MOVIE_DB_API}`;
+    const url = `${MOVIE_DB_FIRSTPART}/3${path}?api_key=${MOVIE_DB_API}`;
     return url;
 }
 
@@ -22,9 +22,9 @@ function getTopRatedMovies() {
     requestMovies(url, render, handleGeneralError);
 }
 
-function getTrendingMovies() {
-    const url = generateMovieDBUrl('/trending/movie/day');
-    const render = renderMovies.bind({ title: 'Trending Movies' })
+function getNowPlayingMovies() {
+    const url = generateMovieDBUrl('/movie/now_playing');
+    const render = renderMovies.bind({ title: 'Now Playing Movies' })
     requestMovies(url, render, handleGeneralError);
 }
 
