@@ -12,6 +12,15 @@ const moviesSearchable = document.querySelector('#movies-searchable');
 
 const whereToWatchContainer = $("#whereToWatch");
 
+function setup(){
+    window.location.hash = "";
+    whereToWatchContainer.hide();
+    searchUpcomingMovies();
+    getTopRatedMovies();
+    searchPopularMovie();
+    getTrendingMovies();
+}
+
 function createImageContainer(imageUrl, id) {
     const tempDiv = document.createElement('div');
     tempDiv.setAttribute('class', 'imageContainer');
@@ -169,8 +178,5 @@ document.onclick = async function (event) {
     }
 }
 
-whereToWatchContainer.hide();
-searchUpcomingMovies();
-getTopRatedMovies();
-searchPopularMovie();
-getTrendingMovies();
+setup();
+
