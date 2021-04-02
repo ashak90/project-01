@@ -9,6 +9,7 @@ const searchField = document.getElementById("search-bar")
 
 const whereToWatchContainer = $("#whereToWatch");
 
+//called when page first loads. gets all of the movie containers filled
 function setup(){
     window.location.hash = "";
     whereToWatchContainer.hide();
@@ -18,6 +19,7 @@ function setup(){
     getTrendingMovies();
 }
 
+//creates an html container to hold movie images
 function createImageContainer(imageUrl, id) {
     const tempDiv = document.createElement('div');
     tempDiv.setAttribute('class', 'imageContainer');
@@ -31,21 +33,25 @@ function createImageContainer(imageUrl, id) {
     return tempDiv;
 }
 
+//resets search input box to a blank string
 function resetInput() {
     searchInput.value = '';
 }
 
+//gives a general error message
 function handleGeneralError(error) {
     log('Error: ', error.message);
     alert(error.message || 'Internal Server');
 }
 
+//creates and returns an html header element
 function createSectionHeader(title) {
     const header = document.createElement('h2');
     header.innerHTML = title;
     return header;
 }
 
+//renders movies to the html page from movie block
 function renderMovies(data) {
     const moviesBlock = generateMoviesBlock(data);
     const header = createSectionHeader(this.title);
@@ -53,6 +59,7 @@ function renderMovies(data) {
     moviesContainer.appendChild(moviesBlock);
 }
 
+//renders the movies the user searched for
 function renderSearchMovies(data) {
     moviesSearchable.innerHTML = '';
     const moviesBlock = generateMoviesBlock(data);
@@ -61,17 +68,17 @@ function renderSearchMovies(data) {
     moviesSearchable.appendChild(moviesBlock);
 }
 
+//creates the movie block that gets rendered
 function generateMoviesBlock(data) {
     const movies = data.results;
     const section = document.createElement('section');
     section.setAttribute('class', 'section');
 
+    //loops through and gets the image url for each movie
     for (let i = 0; i < movies.length; i++) {
         const { poster_path, id } = movies[i];
-
         if (poster_path) {
-            const imageUrl = MOVIE_DB_IMAGE_LASTPART + poster_path;
-    
+            const imageUrl = MOVIE_DB_IMAGE_LASTPART + poster_path;    
             const imageContainer = createImageContainer(imageUrl, id);
             section.appendChild(imageContainer);
         }
@@ -80,6 +87,7 @@ function generateMoviesBlock(data) {
     return movieSectionAndContent;
 }
 
+//creates html container to hold movie elements
 function createMovieContainer(section) {
     const movieElement = document.createElement('div');
     movieElement.setAttribute('class', 'movie');
@@ -95,11 +103,13 @@ function createMovieContainer(section) {
     return movieElement;
 }
 
+//creates where to watch card on the main page
 function displayWhereToWatch(data, imgUrl){       
     whereToWatchContainer.show();
     createCard(data, imgUrl);        
 }
 
+//creates all of the html elements for the where to watch list
 function createCard(data, imgUrl){
     console.log(data);
     let newCard = $("<div>");
@@ -123,6 +133,7 @@ function createCard(data, imgUrl){
     list.addClass("list-group");
     newBody.append(list);
 
+    //loops through and creates a list item for every place to watch
     for(let i = 0; i < data.length; i++){
         let listItem = $("<li>");
         listItem.addClass("list-group-item bg-secondary");
@@ -142,12 +153,14 @@ function createCard(data, imgUrl){
     whereToWatchContainer.append(newCard);
 }
 
+//called when the search button is clicked on
 searchButton.onclick = function (event) {
     event.preventDefault();
     const value = searchInput.value
     backgroundImage.classList.add("hide");
     searchField.classList.add("moveLeft");
 
+    //only executes if there is a search value
    if (value) {    
     searchMovie(value);
     $(moviesContainer).hide();        
@@ -155,15 +168,19 @@ searchButton.onclick = function (event) {
     resetInput();
 }
 
+//called when anything is clicked on, async function because it needs to wait on the movie name call
 document.onclick = async function (event) {    
+    const { tagName, id } = event.target;   
     
-    const { tagName, id } = event.target;       
+    //only runs if the item clicked on is an image
     if (tagName.toLowerCase() === 'img') {
         const movieId = event.target.dataset.movieId;        
         const section = event.target.parentElement.parentElement;
         const content = section.nextElementSibling;
         const imgUrl = $(event.target).attr  ("src");         
-        content.classList.add('content-display');                
+        content.classList.add('content-display');   
+        
+        //waits until it gets the movie title back
         const movieTitle = await getMovieNameFromId(movieId);                           
         getWhereToWatch(movieTitle, "movie", imgUrl);
         window.location.hash = "navbar";               
@@ -174,10 +191,5 @@ document.onclick = async function (event) {
     }
 }
 
+//basic setup when window loads
 setup();
-
-searchMovie(INITIAL_SEARCH_VALUE);
-searchUpcomingMovies();
-getTopRatedMovies();
-searchPopularMovie();
-getNowPlayingMovies();
