@@ -75,6 +75,17 @@ nav span {
     /* top: -100px; */
 }
 
+#search {
+    position: relative;
+    color: rgba(45, 126, 122, 0.9);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid black;
+}
+
 #movies-searchable {
     margin-top: 20px;
     margin-bottom: 50px;

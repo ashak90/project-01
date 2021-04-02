@@ -6,12 +6,16 @@ const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
 const backgroundImage = document.getElementById("bg")
 
-// const searchButton = $("#search");
-// const searchInput = $("#search-input");
-// const moviesContainer = $("#movies-container");
-// const moviesSearchable = $("#movies-searchable");
-
 const whereToWatchContainer = $("#whereToWatch");
+
+function setup(){
+    window.location.hash = "";
+    whereToWatchContainer.hide();
+    searchUpcomingMovies();
+    getTopRatedMovies();
+    searchPopularMovie();
+    getTrendingMovies();
+}
 
 function createImageContainer(imageUrl, id) {
     const tempDiv = document.createElement('div');
@@ -38,7 +42,6 @@ function handleGeneralError(error) {
 function createSectionHeader(title) {
     const header = document.createElement('h2');
     header.innerHTML = title;
-
     return header;
 }
 
@@ -72,7 +75,6 @@ function generateMoviesBlock(data) {
             section.appendChild(imageContainer);
         }
     }
-
     const movieSectionAndContent = createMovieContainer(section);
     return movieSectionAndContent;
 }
@@ -156,7 +158,7 @@ searchButton.onclick = function (event) {
     resetInput();
 }
 
-document.onclick = async function (event) {
+document.onclick = async function (event) {    
     
     const { tagName, id } = event.target;       
     if (tagName.toLowerCase() === 'img') {
@@ -164,19 +166,16 @@ document.onclick = async function (event) {
         const section = event.target.parentElement.parentElement;
         const content = section.nextElementSibling;
         const imgUrl = $(event.target).attr  ("src");         
-        content.classList.add('content-display');
+        content.classList.add('content-display');                
         const movieTitle = await getMovieNameFromId(movieId);                           
-        getWhereToWatch(movieTitle, "movie", imgUrl);       
+        getWhereToWatch(movieTitle, "movie", imgUrl);
+        window.location.hash = "navbar";               
     }
-
     if (id === 'content-close') {
         const content = event.target.parentElement;
         content.classList.remove('content-display');
     }
 }
 
-whereToWatchContainer.hide();
-searchUpcomingMovies();
-getTopRatedMovies();
-searchPopularMovie();
-getTrendingMovies();
+setup();
+
