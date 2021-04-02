@@ -37,15 +37,26 @@ nav span {
     background-size: cover;
     height: 100vh;
     top: 0px;
+    right: 75px;
+    left: 0px;
+    bottom: 600px;
+
+}
+
+#bg.hide::before {
+    content: "";
+    background-image: none;
+    position: relative;
+    opacity: 0.6;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    height: 100vh;
+    top: 0px;
     right: 0px;
     left: 0px;
     bottom: 0px;
-
 }
 
-.hide {
-    display: none !important;
-}
 
 
 #search-bar {
@@ -62,6 +73,20 @@ nav span {
     /* top: -100px; */
 }
 
+#search-bar.moveLeft {
+    position: relative;
+    top: -205px;
+    left: -500px;
+
+    color: white;
+    background-color: rgba(73, 173, 168,.9);
+    padding: 25px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* top: -100px; */
+} 
+
 #search-bar-2 {
     /* position: relative; */
     display: absolute;
@@ -72,6 +97,7 @@ nav span {
     text-align: center;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 500px;
     /* top: -100px; */
 }
 
@@ -123,7 +149,7 @@ img:hover {
 }
 
 .content {
-    display: flex;
+    display: grid;
     justify-content: space-around;
     flex-wrap: wrap;
     align-items: center;
