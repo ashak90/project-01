@@ -4,6 +4,8 @@ const searchButton = document.querySelector('#search');
 const searchInput = document.querySelector('#search-input');
 const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
+const backgroundImage = document.getElementById("bg")
+const searchField = document.getElementById("search-bar")
 
 const whereToWatchContainer = $("#whereToWatch");
 
@@ -68,7 +70,7 @@ function generateMoviesBlock(data) {
         const { poster_path, id } = movies[i];
 
         if (poster_path) {
-            const imageUrl = MOVIE_DB_IMAGE_ENDPOINT + poster_path;
+            const imageUrl = MOVIE_DB_IMAGE_LASTPART + poster_path;
     
             const imageContainer = createImageContainer(imageUrl, id);
             section.appendChild(imageContainer);
@@ -143,6 +145,8 @@ function createCard(data, imgUrl){
 searchButton.onclick = function (event) {
     event.preventDefault();
     const value = searchInput.value
+    backgroundImage.classList.add("hide");
+    searchField.classList.add("moveLeft");
 
    if (value) {    
     searchMovie(value);
@@ -172,3 +176,8 @@ document.onclick = async function (event) {
 
 setup();
 
+searchMovie(INITIAL_SEARCH_VALUE);
+searchUpcomingMovies();
+getTopRatedMovies();
+searchPopularMovie();
+getNowPlayingMovies();
