@@ -4,6 +4,7 @@ const searchButton = document.querySelector('#search');
 const searchInput = document.querySelector('#search-input');
 const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
+const backgroundImage = document.getElementById("bg")
 
 // const searchButton = $("#search");
 // const searchInput = $("#search-input");
@@ -141,6 +142,12 @@ function createCard(data, imgUrl){
 searchButton.onclick = function (event) {
     event.preventDefault();
     const value = searchInput.value
+    backgroundImage.classList.add("hide")
+    const button = document.createElement("div");
+    button.setAttribute("id", "search-bar-2");
+    button.setAttribute("class", "col-sm-4 mt-4")
+    document.body.appendChild(button); 
+
 
    if (value) {    
     searchMovie(value);

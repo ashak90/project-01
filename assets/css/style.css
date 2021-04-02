@@ -19,7 +19,7 @@ nav span {
     background-color: rgb(73, 173, 168);
 }
 
-.bg{
+#bg{
     position: relative;
     height: 100vh;
     width: 100%;
@@ -28,7 +28,7 @@ nav span {
     justify-content: center;
 }
 
-.bg::before {
+#bg::before {
     content: "";
     background-image: url("../images/background-image.jpg");
     position: absolute;
@@ -43,8 +43,29 @@ nav span {
 
 }
 
+.hide {
+    display: none !important;
+}
+
+
 #search-bar {
     position: relative;
+    top: 0px;
+    left: 0px;
+
+    color: white;
+    background-color: rgba(73, 173, 168,.9);
+    padding: 25px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* top: -100px; */
+}
+
+#search-bar-2 {
+    /* position: relative; */
+    display: absolute;
+    float: left;
     color: white;
     background-color: rgba(73, 173, 168,.9);
     padding: 25px;
