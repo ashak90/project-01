@@ -209,7 +209,7 @@ searchButton.onclick = function (event) {
     searchField.classList.add("moveLeft");
     searchField.classList.remove("col-sm-8");
     moviesSearchable.classList.remove("inactive");
-    moviesSearchable.style.marginTop = "1600px";
+    moviesSearchable.style.marginTop = "2500px";
 
     //only executes if there is a search value
    if (value) {    
