@@ -8,7 +8,7 @@ const RAPID_KEY = "0105f13aa9msh4ce35e271a592d6p1f8582jsn7e0ff44b7258";
 const RAPID_HOST = "watch-here.p.rapidapi.com";
 
 //requests movies from the moviedb    
-function requestMovies(url, onComplete, onError) {
+function requestMovies(url, onComplete, onError) {    
     fetch(url)
         .then((res) => res.json())
         .then(onComplete) 
@@ -50,9 +50,8 @@ function searchPopularMovie() {
 }
 
 //searches movie based on the value passed in
-function searchMovie(value) {
-    const url = generateMovieDBUrl('/search/movie') + '&query=' + value;
-    //const url = generateMovieDBUrl(`/keyword/${value}`);
+function searchMovie(value) {    
+    const url = generateMovieDBUrl('/search/movie') + '&query=' + value;    
     const renderSearch = renderSearchMovies.bind({ title: value});
     requestMovies(url, renderSearch, handleGeneralError);
 }

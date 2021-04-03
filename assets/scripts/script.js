@@ -30,7 +30,7 @@ function loadSearchList(){
     var searchArray = JSON.parse(localStorage.getItem("searches"));    
     for (let search of searchArray) {
        createButton(search);
-       console.log(search);
+       //console.log(search);
     }
 }
 
@@ -67,7 +67,7 @@ function createSectionHeader(title) {
 }
 
 //renders movies to the html page from movie block
-function renderMovies(data) {
+function renderMovies(data) {    
     const moviesBlock = generateMoviesBlock(data);
     const header = createSectionHeader(this.title);
     moviesBlock.insertBefore(header, moviesBlock.firstChild);
@@ -75,7 +75,7 @@ function renderMovies(data) {
 }
 
 //renders the movies the user searched for
-function renderSearchMovies(data) {
+function renderSearchMovies(data) {    
     moviesSearchable.innerHTML = '';
     const moviesBlock = generateMoviesBlock(data);
     const header = createSectionHeader("Searched for: " + this.title);
@@ -119,7 +119,7 @@ function createMovieContainer(section) {
 //creates where to watch card on the main page
 function displayWhereToWatch(data, imgUrl){       
     whereToWatchContainer.show();
-    // whereToWatchContainer.setAttribute("width","900px" )
+    //whereToWatchContainer.setAttribute("width","900px" )
     createCard(data, imgUrl);        
 }
 
@@ -127,11 +127,12 @@ function displayWhereToWatch(data, imgUrl){
 function createCard(data, imgUrl){
     console.log(data);
     let newCard = $("<div>");
-    newCard.addClass("card text-center bg-secondary");
+    newCard.addClass("card text-center");
+    newCard.attr("style", "width: 24rem");
 
     let newImg = $("<img>");
     newImg.attr("src", imgUrl);
-    newImg.addClass("card-img-top");
+    newImg.addClass("card-img-top");    
     newCard.append(newImg);
 
     let newBody = $("<div>");
@@ -150,7 +151,7 @@ function createCard(data, imgUrl){
     //loops through and creates a list item for every place to watch
     for(let i = 0; i < data.length; i++){
         let listItem = $("<li>");
-        listItem.addClass("list-group-item bg-secondary");
+        listItem.addClass("list-group-item");
         list.append(listItem);          
   
         let cardText = $("<p>");
@@ -159,7 +160,7 @@ function createCard(data, imgUrl){
         listItem.append(cardText);
 
         let button = $("<a>");
-        button.addClass("btn btn-outline-light");
+        button.addClass("btn btn-outline-dark");
         button.text("Click here to stream!");
         button.attr("href", data[i].WatchUrl);
         listItem.append(button);        
@@ -183,12 +184,10 @@ function setRecentSearch(searchName) {
     }
  }
  //gets data from recent search when clicked
-function getRecentSearch(event) {
-    let searchName = searchInput.value;
+function getRecentSearch(event) {    
     var currentButton = $(event.target);
-    searchName = currentButton.text();
-    console.log(searchName);
-    searchMovie(searchName);
+    searchInput.value = currentButton.text();       
+    runSearch(event);
  }
  
  //creates a button in the list with the correct bootstrap classes
@@ -198,11 +197,7 @@ function getRecentSearch(event) {
     newButton.text(name);
     recentSearchesEl.prepend(newButton);
  }
-
- recentSearchesEl.on("click", getRecentSearch);
-
-//called when the search button is clicked on
-searchButton.onclick = function (event) {
+ function runSearch(event){
     event.preventDefault();
     const value = searchInput.value
     backgroundImage.classList.add("hide");
@@ -218,7 +213,12 @@ searchButton.onclick = function (event) {
     setRecentSearch(value);        
    }
     resetInput();
-}
+ }
+
+ recentSearchesEl.on("click", getRecentSearch);
+
+//called when the search button is clicked on
+searchButton.onclick = runSearch;
 
 //called when anything is clicked on, async function because it needs to wait on the movie name call
 document.onclick = async function (event) {    
@@ -237,7 +237,7 @@ document.onclick = async function (event) {
         //waits until it gets the movie title back
         const movieTitle = await getMovieNameFromId(movieId);                           
         getWhereToWatch(movieTitle, "movie", imgUrl);
-        window.location.hash = "navbar";               
+        window.location.hash = "whereToWatch";               
     }
     if (id === 'content-close') {
         const content = event.target.parentElement;
