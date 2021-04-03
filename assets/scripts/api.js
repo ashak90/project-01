@@ -66,8 +66,8 @@ async function getMovieNameFromId(movieId){
 }
 
 //using jquery's ajax function to call the where to watch api
-function getWhereToWatch(title, type, imgUrl){      
-    
+function getWhereToWatch(title, type, imgUrl){  
+    title = title.replace(".", "");  
     //params passed in with the post request
     const settings = {
         "async": true,
