@@ -22,3 +22,15 @@ This dynamic Website application made with HTML, CSS, and JavaScript will allow 
 # Deployed Application Link
 
 * [project-01](https://ashak90.github.io/project-01/)
+
+
+
+# Collaborators 
+
+| Name    | Github Page |
+| ------- | ----------- |
+| Greg    | https://github.com/gtook101 |
+| Hunter  | https://github.com/mythosmystery |
+| Erica   | https://github.com/ricapi96  |
+| Asha    | https://github.com/ashak90   |
+| Oli     | https://github.com/oimonugo23  |
