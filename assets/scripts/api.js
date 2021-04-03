@@ -52,6 +52,7 @@ function searchPopularMovie() {
 //searches movie based on the value passed in
 function searchMovie(value) {
     const url = generateMovieDBUrl('/search/movie') + '&query=' + value;
+    //const url = generateMovieDBUrl(`/keyword/${value}`);
     const renderSearch = renderSearchMovies.bind({ title: value});
     requestMovies(url, renderSearch, handleGeneralError);
 }

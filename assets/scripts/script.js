@@ -8,15 +8,30 @@ const backgroundImage = document.getElementById("bg")
 const searchField = document.getElementById("search-bar")
 
 const whereToWatchContainer = $("#whereToWatch");
+ 
+const recentSearchesEl = $("#recentSearches");
+
+let recentSearches = [];
 
 //called when page first loads. gets all of the movie containers filled
 function setup(){
+    if(localStorage.getItem("searches") == null){
+        localStorage.setItem("searches", JSON.stringify(recentSearches));
+    }    
+    loadSearchList();
     window.location.hash = "";
     whereToWatchContainer.hide();
     searchUpcomingMovies();
     getTopRatedMovies();
-    searchPopularMovie();
-    getTrendingMovies();
+    searchPopularMovie();    
+}
+
+function loadSearchList(){
+    var searchArray = JSON.parse(localStorage.getItem("searches"));    
+    for (let search of searchArray) {
+       createButton(search);
+       console.log(search);
+    }
 }
 
 //creates an html container to hold movie images
@@ -91,13 +106,11 @@ function generateMoviesBlock(data) {
 function createMovieContainer(section) {
     const movieElement = document.createElement('div');
     movieElement.setAttribute('class', 'movie');
-
     const template = `
         <div class="content">
             <p id="content-close"></p>
         </div>
     `;
-
     movieElement.innerHTML = template;
     movieElement.insertBefore(section, movieElement.firstChild);
     return movieElement;
@@ -153,6 +166,40 @@ function createCard(data, imgUrl){
     whereToWatchContainer.append(newCard);
 }
 
+//sets recent searches from buttons and adds to localstorage
+function setRecentSearch(searchName) {
+    var buttonArray = recentSearchesEl.find("button");
+    var invalid = false;
+    let searchList = JSON.parse(localStorage.getItem("searches"));
+    for (let i = 0; i < buttonArray.length; i++) {       
+       if (buttonArray[i].textContent == searchName) invalid = true;
+       if (searchName == "" || searchName == null) invalid = true;
+    }
+    if (!invalid) {
+       searchList.push(searchName);
+       createButton(searchName);
+       localStorage.setItem("searches", JSON.stringify(searchList));
+    }
+ }
+ //gets data from recent search when clicked
+function getRecentSearch(event) {
+    let searchName = searchInput.value;
+    var currentButton = $(event.target);
+    searchName = currentButton.text();
+    console.log(searchName);
+    searchMovie(searchName);
+ }
+ 
+ //creates a button in the list with the correct bootstrap classes
+ function createButton(name) {
+    var newButton = $("<button type='button'>");
+    newButton.addClass("list-group-item list-group-item-action");
+    newButton.text(name);
+    recentSearchesEl.prepend(newButton);
+ }
+
+ recentSearchesEl.on("click", getRecentSearch);
+
 //called when the search button is clicked on
 searchButton.onclick = function (event) {
     event.preventDefault();
@@ -163,7 +210,8 @@ searchButton.onclick = function (event) {
     //only executes if there is a search value
    if (value) {    
     searchMovie(value);
-    $(moviesContainer).hide();        
+    $(moviesContainer).hide();
+    setRecentSearch(value);        
    }
     resetInput();
 }
