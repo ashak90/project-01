@@ -6,7 +6,7 @@ const moviesContainer = document.querySelector('#movies-container');
 const moviesSearchable = document.querySelector('#movies-searchable');
 const backgroundImage = document.getElementById("bg")
 const searchField = document.getElementById("search-bar")
-
+const whereToWatchModal = document.getElementById("where-modal")
 const whereToWatchContainer = $("#whereToWatch");
  
 const recentSearchesEl = $("#recentSearches");
@@ -119,6 +119,7 @@ function createMovieContainer(section) {
 //creates where to watch card on the main page
 function displayWhereToWatch(data, imgUrl){       
     whereToWatchContainer.show();
+    // whereToWatchContainer.setAttribute("width","900px" )
     createCard(data, imgUrl);        
 }
 
@@ -206,7 +207,9 @@ searchButton.onclick = function (event) {
     const value = searchInput.value
     backgroundImage.classList.add("hide");
     searchField.classList.add("moveLeft");
-
+    moviesSearchable.classList.remove("inactive");
+    moviesSearchable.style.marginTop = "2500px";
+    
     //only executes if there is a search value
    if (value) {    
     searchMovie(value);
@@ -222,6 +225,8 @@ document.onclick = async function (event) {
     
     //only runs if the item clicked on is an image
     if (tagName.toLowerCase() === 'img') {
+
+        console.log("Clicked on an image")
         const movieId = event.target.dataset.movieId;        
         const section = event.target.parentElement.parentElement;
         const content = section.nextElementSibling;
