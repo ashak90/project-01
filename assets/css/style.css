@@ -74,9 +74,9 @@ nav span {
 }
 
 #search-bar.moveLeft {
-    position: relative;
-    top: -205px;
-    left: -200px;
+    position: absolute;
+    top: 0px;
+    left: 25px;
 
     color: white;
     background-color: rgba(73, 173, 168,.9);
@@ -86,7 +86,6 @@ nav span {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* top: -100px; */
 } 
-
 
 #search {
     position: relative;
@@ -100,8 +99,10 @@ nav span {
 }
 
 #movies-searchable {
-    margin-top: 20px;
-    margin-bottom: 50px;
+    /* margin-top: 2500px; */
+    margin-top: 25px;
+    margin-right: 30px;
+    /* margin-bottom: 50px; */
 }
 
 .movie {
@@ -110,6 +111,7 @@ nav span {
 
 section {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     overflow-x: auto;
 }
@@ -146,3 +148,27 @@ img:hover {
 /* .content-display {
     display: block;
 } */
+
+#whereToWatch {
+    width: 450px;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .search{
+        display: flex;
+        /* width: 100%; */
+        /* flex-wrap: wrap !important;
+        overflow-x: auto;
+}  */
+
+.inactive {
+    display: none;
+}
+
+/* .display-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}  */
