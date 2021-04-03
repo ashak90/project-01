@@ -36,4 +36,4 @@ This dynamic Website application made with HTML, CSS, and JavaScript will allow 
 | Oli     | https://github.com/oimonugo23  |
 
 
-                                 :blue_heart: Made by The Fellowship :blue_heart:
+                                       Made by The Fellowship
