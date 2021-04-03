@@ -8,7 +8,7 @@ const backgroundImage = document.getElementById("bg")
 const searchField = document.getElementById("search-bar")
 const whereToWatchModal = document.getElementById("where-modal")
 const whereToWatchContainer = $("#whereToWatch");
- 
+
 const recentSearchesEl = $("#recentSearches");
 
 let recentSearches = [];
@@ -207,9 +207,10 @@ searchButton.onclick = function (event) {
     const value = searchInput.value
     backgroundImage.classList.add("hide");
     searchField.classList.add("moveLeft");
+    searchField.classList.remove("col-sm-8");
     moviesSearchable.classList.remove("inactive");
-    moviesSearchable.style.marginTop = "2500px";
-    
+    moviesSearchable.style.marginTop = "1600px";
+
     //only executes if there is a search value
    if (value) {    
     searchMovie(value);

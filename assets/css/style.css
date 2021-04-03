@@ -77,6 +77,8 @@ nav span {
     position: absolute;
     top: 0px;
     left: 25px;
+    width: 350px;
+    margin-left: 150px;
 
     color: white;
     background-color: rgba(73, 173, 168,.9);
@@ -150,10 +152,13 @@ img:hover {
 } */
 
 #whereToWatch {
-    width: 450px;
-    height: 200px;
+    /* width: 1000px;
+    height: 200px; */
     justify-content: center;
     align-items: center;
+    float: left;
+    margin-top: 1600px;
+    margin-right: 100px;
 }
 
 /* .search{
@@ -165,6 +170,11 @@ img:hover {
 
 .inactive {
     display: none;
+}
+
+#all-movies-container {
+    float: left;
+    margin-left: 150px;
 }
 
 /* .display-flex {
