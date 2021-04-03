@@ -16,42 +16,64 @@
          crossorigin="anonymous"
       />
    </head>
-
-   <body>
+   <header>
       <nav class="navbar navbar-light bg-light" id="navbar">
          <div class="container-fluid">
             <span class="navbar-brand mb-0 h1 fs-1"> The Watch Sensor </span>
          </div>
       </nav>
+   </header>
 
-      <div id="bg">
-         <div class="row col-sm-4 justify-content-center">
-            <div id="whereToWatch"></div>
-            <div class="col-sm-8 mt-4" id="search-bar">
-               <h1>Search By:</h1>
-               <form class="form-inline input-group" id="search-city">
-                  <input class="form-control" type="search" placeholder="Search" id="search-input" />
-               </form>
-               <button id="search">Search</button>
-            </div>
-
-            <div class="container-sm mt-4" id="all-movies-container">
-               <div class="card">
+   <body>
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col col-md-4">
+               <div class="card justify-content-center m-3" id="custom-card">
                   <div class="card-body">
-                     <h5 class="card-title">Recently Searched for:</h5>
-                     <ul class="list-group list-group-flush" id="recentSearches"></ul>
+                     <h5 class="card-title">Search:</h5>
+                     <div class="input-group mb-2">
+                        <input
+                           type="text"
+                           class="form-control"
+                           placeholder="Search movie"
+                           aria-label="movie"
+                           id="search-input"
+                        />
+                        <button class="btn btn-outline-dark" type="button" id="search">Search</button>
+                     </div>
                   </div>
-               </div>        
-
-               <!-- <div id="movies-searchable"></div> -->
+               </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+               <div class="card justify-content-center m-3" id="custom-card">
+                  <div class="card-body">
+                     <h5 class="card-title">Recent Searches:</h5>
+                     <ul class="list-group list-group-flush" id="recent-searches"></ul>
+                  </div>
+               </div>
+            </div>
+            <div class="col col-md-3 mx-3">
+               <nav id="jump"></nav>
+               <div id="where-to-watch"></div>
             </div>
          </div>
-         <div class="container-fluid inactive col-7 mt-25" id="movies-searchable">
-            <!-- <div id="movies-searchable"></div> -->
+
+         <div class="row">
+            <div class="col-12" id="search-card">
+               <div class="card justify-content-center m-3" id="custom-card">
+                  <div class="card-body" id="movies-searchable"></div>
+               </div>
+            </div>
          </div>
-      </div>
-      <div class="container-fluid" id="all-movies-container">
-         <div id="movies-container"></div>
+         <div class="row">
+            <div class="col">
+               <div class="card m-3" id="custom-card">
+                  <div class="card-body" id="all-movies-container">
+                     <div id="movies-container"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
 
       <script

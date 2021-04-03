@@ -30,9 +30,10 @@
     border-radius: .25rem;
 }
 
+
 #movies-searchable {
-    margin-top: 20px;
-    margin-bottom: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .movie {
@@ -41,6 +42,7 @@
 
 section {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     overflow-x: auto;
 }

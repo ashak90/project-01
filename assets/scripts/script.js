@@ -7,27 +7,30 @@ const moviesSearchable = document.querySelector('#movies-searchable');
 const backgroundImage = document.getElementById("bg")
 const searchField = document.getElementById("search-bar")
 const whereToWatchModal = document.getElementById("where-modal")
-const whereToWatchContainer = $("#whereToWatch");
 
-const recentSearchesEl = $("#recentSearches");
+const whereToWatchContainer = $("#where-to-watch");
+const recentSearchesEl = $("#recent-searches");
+const searchCard = $("#search-card");
 
 let recentSearches = [];
 
 //called when page first loads. gets all of the movie containers filled
 function setup(){
     if(localStorage.getItem("searches") == null){
-        localStorage.setItem("searches", JSON.stringify(recentSearches));
-    }    
+        localStorage.setItem("searches", JSON.stringify(recentSearches));           
+    }       
     loadSearchList();
     window.location.hash = "";
+    searchCard.hide();
     whereToWatchContainer.hide();
     searchUpcomingMovies();
     getTopRatedMovies();
     searchPopularMovie();    
 }
 
+//loads recently searched items from local storage
 function loadSearchList(){
-    var searchArray = JSON.parse(localStorage.getItem("searches"));    
+    let searchArray = JSON.parse(localStorage.getItem("searches"));    
     for (let search of searchArray) {
        createButton(search);
        //console.log(search);
@@ -118,8 +121,7 @@ function createMovieContainer(section) {
 
 //creates where to watch card on the main page
 function displayWhereToWatch(data, imgUrl){       
-    whereToWatchContainer.show();
-    //whereToWatchContainer.setAttribute("width","900px" )
+    whereToWatchContainer.show();    
     createCard(data, imgUrl);        
 }
 
@@ -128,7 +130,7 @@ function createCard(data, imgUrl){
     console.log(data);
     let newCard = $("<div>");
     newCard.addClass("card text-center");
-    newCard.attr("style", "width: 24rem");
+    newCard.attr("id", "custom-card");      
 
     let newImg = $("<img>");
     newImg.attr("src", imgUrl);
@@ -152,6 +154,7 @@ function createCard(data, imgUrl){
     for(let i = 0; i < data.length; i++){
         let listItem = $("<li>");
         listItem.addClass("list-group-item");
+        listItem.attr("id", "custom-card");
         list.append(listItem);          
   
         let cardText = $("<p>");
@@ -170,8 +173,8 @@ function createCard(data, imgUrl){
 
 //sets recent searches from buttons and adds to localstorage
 function setRecentSearch(searchName) {
-    var buttonArray = recentSearchesEl.find("button");
-    var invalid = false;
+    let buttonArray = recentSearchesEl.find("button");
+    let invalid = false;
     let searchList = JSON.parse(localStorage.getItem("searches"));
     for (let i = 0; i < buttonArray.length; i++) {       
        if (buttonArray[i].textContent == searchName) invalid = true;
@@ -185,29 +188,27 @@ function setRecentSearch(searchName) {
  }
  //gets data from recent search when clicked
 function getRecentSearch(event) {    
-    var currentButton = $(event.target);
+    let currentButton = $(event.target);
     searchInput.value = currentButton.text();       
     runSearch(event);
  }
  
  //creates a button in the list with the correct bootstrap classes
  function createButton(name) {
-    var newButton = $("<button type='button'>");
-    newButton.addClass("list-group-item list-group-item-action");
+    let newButton = $("<button type='button'>");
+    newButton.addClass("list-group-item list-group-item-action");        
     newButton.text(name);
     recentSearchesEl.prepend(newButton);
  }
+
+
  function runSearch(event){
     event.preventDefault();
-    const value = searchInput.value
-    backgroundImage.classList.add("hide");
-    searchField.classList.add("moveLeft");
-    searchField.classList.remove("col-sm-8");
-    moviesSearchable.classList.remove("inactive");
-    moviesSearchable.style.marginTop = "2500px";
+    const value = searchInput.value    
 
     //only executes if there is a search value
-   if (value) {    
+   if (value) {
+    searchCard.show();       
     searchMovie(value);
     $(moviesContainer).hide();
     setRecentSearch(value);        
@@ -237,13 +238,12 @@ document.onclick = async function (event) {
         //waits until it gets the movie title back
         const movieTitle = await getMovieNameFromId(movieId);                           
         getWhereToWatch(movieTitle, "movie", imgUrl);
-        window.location.hash = "whereToWatch";               
+        location.hash = "jump";               
     }
     if (id === 'content-close') {
         const content = event.target.parentElement;
         content.classList.remove('content-display');
     }
 }
-
 //basic setup when window loads
 setup();
