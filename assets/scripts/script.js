@@ -119,7 +119,7 @@ function createMovieContainer(section) {
 //creates where to watch card on the main page
 function displayWhereToWatch(data, imgUrl){       
     whereToWatchContainer.show();
-    // whereToWatchContainer.setAttribute("width","900px" )
+    //whereToWatchContainer.setAttribute("width","900px" )
     createCard(data, imgUrl);        
 }
 
@@ -127,11 +127,12 @@ function displayWhereToWatch(data, imgUrl){
 function createCard(data, imgUrl){
     console.log(data);
     let newCard = $("<div>");
-    newCard.addClass("card text-center bg-secondary");
+    newCard.addClass("card text-center");
+    newCard.attr("style", "width: 24rem");
 
     let newImg = $("<img>");
     newImg.attr("src", imgUrl);
-    newImg.addClass("card-img-top");
+    newImg.addClass("card-img-top");    
     newCard.append(newImg);
 
     let newBody = $("<div>");
@@ -150,7 +151,7 @@ function createCard(data, imgUrl){
     //loops through and creates a list item for every place to watch
     for(let i = 0; i < data.length; i++){
         let listItem = $("<li>");
-        listItem.addClass("list-group-item bg-secondary");
+        listItem.addClass("list-group-item");
         list.append(listItem);          
   
         let cardText = $("<p>");
@@ -159,7 +160,7 @@ function createCard(data, imgUrl){
         listItem.append(cardText);
 
         let button = $("<a>");
-        button.addClass("btn btn-outline-light");
+        button.addClass("btn btn-outline-dark");
         button.text("Click here to stream!");
         button.attr("href", data[i].WatchUrl);
         listItem.append(button);        
