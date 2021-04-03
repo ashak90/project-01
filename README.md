@@ -34,3 +34,6 @@ This dynamic Website application made with HTML, CSS, and JavaScript will allow 
 | Erica   | https://github.com/ricapi96  |
 | Asha    | https://github.com/ashak90   |
 | Oli     | https://github.com/oimonugo23  |
+
+
+                                 :blue_heart: Made by The Fellowship :blue_heart:
