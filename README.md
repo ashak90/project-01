@@ -16,12 +16,12 @@ This dynamic Website application made with HTML, CSS, and JavaScript will allow 
 
 # Screenshot
 
-* ![](./assets/images/watch-sensor.png)
+* ![](./assets/images/The-Watch-Sensor.png)
 
 
 # Deployed Application Link
 
-* [project-01](https://ashak90.github.io/project-01/)
+* [The Watch Sensor](https://ashak90.github.io/project-01/)
 
 
 
